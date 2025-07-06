@@ -12,6 +12,11 @@ export default function DashboardPage() {
   const [user, setUser] = useState<User | null>(null);
   const token = localStorage.getItem('token');
 
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    navigate('/login');
+  };
+
   useEffect(() => {
     const fetchUser = async () => {
       const res = await fetch(`${BASE_URL}/users/me`, {
@@ -83,6 +88,16 @@ export default function DashboardPage() {
           </button>
         </div>
       )}
+
+      {/* Logout Button for all users */}
+      <div className="mt-10">
+        <button
+          onClick={handleLogout}
+          className="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700"
+        >
+          Logout
+        </button>
+      </div>
     </div>
   );
 }
