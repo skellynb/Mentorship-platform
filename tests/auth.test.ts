@@ -1,7 +1,7 @@
 import request from 'supertest';
 import mongoose from 'mongoose';
-import app from '../src'; // adjust if your app is in another path
-import UserModel from '../src/models/user';
+import app from '../server/src'; // adjust if your app is in another path
+import UserModel from '../server/src/models/user';
 
 beforeAll(async () => {
   await mongoose.connect('mongodb://localhost:27017/mentorship-test');

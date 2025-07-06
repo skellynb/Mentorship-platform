@@ -1,8 +1,8 @@
 import request from 'supertest';
 import mongoose from 'mongoose';
-import app from '../src';  // your express app
-import UserModel from '../src/models/user';
-import { Session } from '../src/models/session';
+import app from '../server/src';  // your express app
+import UserModel from '../server/src/models/user';
+import { Session } from '../server/src/models/session';
 
 describe('Mentorship Sessions', () => {
   let menteeToken: string;

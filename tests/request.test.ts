@@ -1,8 +1,8 @@
 import request from 'supertest';
-import app from '../src'; // path to your Express app
+import app from '../server/src'; // path to your Express app
 import mongoose from 'mongoose';
-import UserModel from '../src/models/user';
-import RequestModel from '../src/models/request';
+import UserModel from '../server/src/models/user';
+import RequestModel from '../server/src/models/request';
 
 beforeAll(async () => {
   await mongoose.connect('mongodb://localhost:27017/mentorship-test');

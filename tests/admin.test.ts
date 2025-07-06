@@ -1,7 +1,7 @@
 import request from 'supertest';
 import mongoose from 'mongoose';
-import app from '../src'; // your Express app
-import UserModel from '../src/models/user';
+import app from '../server/src'; // your Express app
+import UserModel from '../server/src/models/user';
 
 describe('Admin Routes', () => {
   let adminToken: string;
