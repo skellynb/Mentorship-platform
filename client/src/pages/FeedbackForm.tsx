@@ -1,5 +1,6 @@
-// src/components/FeedbackForm.tsx
+
 import { useState } from 'react';
+import BASE_URL from '../api';
 
 interface Props {
   sessionId: string;
@@ -15,13 +16,13 @@ export default function FeedbackForm({ sessionId }: Props) {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    const res = await fetch(`http://localhost:5000/feedback/${sessionId}`, {
+    const res = await fetch(`${BASE_URL}/feedback/${sessionId}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${token}`, // This must be present or you'll get 401
       },
-      body: JSON.stringify({ comment: message, rating }), // ✅ Now 'message' is defined
+      body: JSON.stringify({ comment: message, rating }), 
     });
 
     if (res.ok) {

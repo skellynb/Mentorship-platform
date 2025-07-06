@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-
+import BASE_URL from '../api';
 interface User {
   _id: string;
   name: string;
@@ -26,13 +26,13 @@ export default function AdminUsersPage() {
     const fetchAllAdminData = async () => {
       try {
         const [usersRes, matchesRes, sessionsRes] = await Promise.all([
-          fetch('http://localhost:5000/admin/users', {
+          fetch(`${BASE_URL}/admin/users`, {
             headers: { Authorization: `Bearer ${token}` },
           }),
-          fetch('http://localhost:5000/admin/matches', {
+          fetch(`${BASE_URL}/admin/matches`, {
             headers: { Authorization: `Bearer ${token}` },
           }),
-          fetch('http://localhost:5000/admin/sessions/count', {
+          fetch(`${BASE_URL}/admin/sessions/count`, {
             headers: { Authorization: `Bearer ${token}` },
           }),
         ]);
@@ -104,7 +104,7 @@ const role = (form.elements.namedItem('role') as HTMLSelectElement).value;
 
 
       try {
-        const res = await fetch('http://localhost:5000/auth/register', {
+        const res = await fetch(`${BASE_URL}/auth/register`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

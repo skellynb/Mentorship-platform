@@ -3,6 +3,7 @@ import dayjs from 'dayjs';
 import weekday from 'dayjs/plugin/weekday';
 import isSameOrAfter from 'dayjs/plugin/isSameOrAfter';
 import { useNavigate } from 'react-router-dom';
+import BASE_URL from '../api';
 
 dayjs.extend(weekday);
 dayjs.extend(isSameOrAfter);
@@ -58,7 +59,7 @@ export default function SessionRequestPage() {
   const token = localStorage.getItem('token');
 
   useEffect(() => {
-    fetch('http://localhost:5000/requests/sent', {
+    fetch(`${BASE_URL}/requests/sent`, {
       headers: {
         Authorization: `Bearer ${token}`,
         'Content-Type': 'application/json',
@@ -75,7 +76,7 @@ export default function SessionRequestPage() {
     setSelectedMentorId((prev) => (prev === mentorId ? null : mentorId));
     setLoadingSlots(true);
     try {
-      const res = await fetch(`http://localhost:5000/availability/${mentorId}`, {
+      const res = await fetch(`${BASE_URL}/availability/${mentorId}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       const data = await res.json();
@@ -97,7 +98,7 @@ export default function SessionRequestPage() {
     setBooking(true);
 
     try {
-      const res = await fetch('http://localhost:5000/sessions', {
+      const res = await fetch(`${BASE_URL}/sessions`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

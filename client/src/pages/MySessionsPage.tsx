@@ -1,6 +1,7 @@
 // src/pages/MySessionsPage.tsx
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import BASE_URL from '../api';
 
 interface Session {
   _id: string;
@@ -16,7 +17,7 @@ export default function MySessionsPage() {
   const token = localStorage.getItem('token');
 
   useEffect(() => {
-    fetch('http://localhost:5000/sessions/my', {
+    fetch(`${BASE_URL}/sessions/my`, {
       headers: { Authorization: `Bearer ${token}` },
     })
       .then(res => res.json())

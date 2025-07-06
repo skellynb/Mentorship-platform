@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import BASE_URL from '../api';
+
 
 interface Mentor {
   _id: string;
@@ -25,7 +27,7 @@ export default function MentorsPage() {
     setError(null);
 
     try {
-      let url = 'http://localhost:5000/users/mentors';
+      let url = `${BASE_URL}/users/mentors`;
       if (skill) {
         url += `?skill=${encodeURIComponent(skill)}`;
       }
@@ -59,7 +61,7 @@ export default function MentorsPage() {
     setError(null);
 
     try {
-      let url = 'http://localhost:5000/users/mentors';
+      let url = `${BASE_URL}/users/mentors`;
       if (skill) {
         url += `?skill=${encodeURIComponent(skill)}`;
       }
@@ -85,7 +87,7 @@ export default function MentorsPage() {
 
     const fetchSentRequests = async () => {
     try {
-      const res = await fetch('http://localhost:5000/requests/sent', {
+      const res = await fetch(`${BASE_URL}/requests/sent`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       const data = await res.json();
@@ -112,7 +114,7 @@ export default function MentorsPage() {
 
   const requestMentorship = async (mentorId: string) => {
     try {
-      const res = await fetch('http://localhost:5000/requests', {
+      const res = await fetch(`${BASE_URL}/requests`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -143,7 +145,7 @@ export default function MentorsPage() {
 
   return (
     <div className="p-6">
-      {/* ✅ Back to dashboard */}
+      {/*Back to dashboard */}
       <button
         onClick={() => navigate('/dashboard')}
         className="mb-4 bg-gray-200 px-4 py-2 rounded hover:bg-gray-300"

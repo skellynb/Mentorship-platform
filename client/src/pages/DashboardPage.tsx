@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import BASE_URL from '../api';
 
 interface User {
   name: string;
@@ -13,7 +14,7 @@ export default function DashboardPage() {
 
   useEffect(() => {
     const fetchUser = async () => {
-      const res = await fetch('http://localhost:5000/users/me', {
+      const res = await fetch(`${BASE_URL}/users/me`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

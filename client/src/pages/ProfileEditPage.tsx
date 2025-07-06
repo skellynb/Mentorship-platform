@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Select from 'react-select';
+import BASE_URL from '../api';
 
 //list of skills
 const availableSkills = [
@@ -48,7 +49,7 @@ export default function ProfileEditPage() {
 
     const fetchProfile = async () => {
       try {
-        const res = await fetch('http://localhost:5000/users/me', {
+        const res = await fetch(`${BASE_URL}/users/me`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -86,7 +87,7 @@ export default function ProfileEditPage() {
     }
 
     try {
-      const res = await fetch('http://localhost:5000/users/me/profile', {
+      const res = await fetch(`${BASE_URL}/users/me/profile`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

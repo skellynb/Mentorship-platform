@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import BASE_URL from '../api';
 
 interface Request {
   _id: string;
@@ -18,7 +19,7 @@ export default function MentorRequests() {
   const token = localStorage.getItem('token');
 
   useEffect(() => {
-  fetch('http://localhost:5000/requests/received', {
+  fetch(`${BASE_URL}/requests/received`, {
     headers: { Authorization: `Bearer ${token}` },
   })
     .then(res => res.json())
@@ -33,7 +34,7 @@ export default function MentorRequests() {
 
   const updateRequestStatus = async (requestId: string, status: 'ACCEPTED' | 'REJECTED') => {
     try {
-      const res = await fetch(`http://localhost:5000/requests/${requestId}`, {
+      const res = await fetch(`${BASE_URL}/requests/${requestId}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

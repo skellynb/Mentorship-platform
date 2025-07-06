@@ -1,6 +1,7 @@
 // src/pages/RegisterPage.tsx
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import BASE_URL from '../api';
 
 export default function RegisterPage() {
   const [form, setForm] = useState({ name: '', email: '', password: '', role: 'mentee' });
@@ -12,7 +13,7 @@ export default function RegisterPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const res = await fetch('http://localhost:5000/auth/register', {
+    const res = await fetch(`${BASE_URL}/auth/register`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(form)

@@ -2,6 +2,7 @@
 import { useParams } from 'react-router-dom';
 import FeedbackForm from './FeedbackForm';
 
+
 export default function SessionDetailsPage() {
   const { sessionId } = useParams();
 

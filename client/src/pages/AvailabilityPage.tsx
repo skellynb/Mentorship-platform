@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import dayjs from 'dayjs';
-
+import BASE_URL from '../api';
 type AvailabilityBlock = {
   _id?: string;
   dayOfWeek: string;
@@ -26,8 +26,8 @@ export default function AvailabilityPage() {
     const fetchAvailability = async () => {
       try {
         const endpoint = mentorId
-          ? `http://localhost:5000/availability/${mentorId}`
-          : `http://localhost:5000/availability`;
+          ? `${BASE_URL}/availability/${mentorId}`
+          : `${BASE_URL}/availability`;
 
         const res = await fetch(endpoint, {
           headers: { Authorization: `Bearer ${token}` }
@@ -48,7 +48,7 @@ export default function AvailabilityPage() {
     if (!newBlock.dayOfWeek || !newBlock.startTime || !newBlock.endTime) return;
 
     try {
-      const res = await fetch('http://localhost:5000/availability', {
+      const res = await fetch(`${BASE_URL}/availability`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -72,7 +72,7 @@ export default function AvailabilityPage() {
 
   const handleDelete = async (id: string) => {
     try {
-      await fetch(`http://localhost:5000/availability/${id}`, {
+      await fetch(`${BASE_URL}/availability/${id}`, {
         method: 'DELETE',
         headers: { Authorization: `Bearer ${token}` }
       });
