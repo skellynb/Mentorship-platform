@@ -38,5 +38,35 @@ This project allows users to register as a **mentor**, **mentee**, or **admin**,
 ## Login Details
 
 - MENTORS
++ steph@gmail.com
+
++ password: password123
+
++ olat@gmail.com
+
++ password: password1234
+
+- MENTEES
++ bisi@gmail.com
+
++ password: password123
+
++ hai@gmail.com
+
++ password: password123
+
+- #ADMIN
++ ife@gmail.com
+
++ password:password123 
+
+
++ rose@gmail.com
+
++ password:password123 
+
+
+
+
 
 
