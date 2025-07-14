@@ -1,0 +1,7 @@
+<svg width="220" height="60" viewBox="0 0 220 60" xmlns="http://www.w3.org/2000/svg">
+  <!-- Icon "M" -->
+  <path d="M10 45 L20 15 L30 45 L40 15 L50 45" fill="none" stroke="#1E3A8A" stroke-width="4"></path>
+  <!-- Text -->
+  <text x="60" y="42" font-family="Segoe UI, sans-serif" font-size="32" font-weight="bold" fill="#1E3A8A">Ment</text>
+  <text x="145" y="42" font-family="Segoe UI, sans-serif" font-size="32" font-weight="bold" fill="#EC4899">oria</text>
+</svg>

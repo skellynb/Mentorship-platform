@@ -70,7 +70,17 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100 p-4">
+    <div className="min-h-screen bg-cover bg-center p-4"
+    style={{ backgroundImage: 'linear-gradient(to right, #dceeff, #ffe3e3)' }}>
+
+    <div className="flex  justify-center pt-8">
+      <img
+        src='/logo.svg'
+        alt="Mentoria Logo"
+        className="w-70 h-auto"
+        />
+     </div> 
+      
       <form
         onSubmit={handleLogin}
         className="bg-white p-8 rounded shadow-md w-full max-w-md"
@@ -108,6 +118,7 @@ export default function LoginPage() {
           Don’t have an account? Register here
         </button>
       </form>
+      
     </div>
   );
 }
