@@ -144,12 +144,14 @@ export default function ProfileEditPage() {
   if (loading) return <p className="p-6">Loading...</p>;
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 p-6">
+    <div className="min-h-screen flex items-center justify-center  p-6"
+    style={{ backgroundImage: 'linear-gradient(to right, #dceeff, #ffe3e3)' }}>
       <form
         onSubmit={handleUpdate} // form submit triggers handleUpdate
         className="bg-white p-6 rounded shadow w-full max-w-lg"
       >
-        <h2 className="text-2xl font-bold mb-4 text-center">Edit Profile</h2>
+        <h2 className="text-2xl font-bold mb-4 text-center text-[#ec4899]"
+        style={{ fontFamily: 'Poppins, sans-serif' }}>Profile Hub</h2>
 
         {message && (
           <p className={`text-center mb-2 ${isProfileComplete() ? 'text-green-600' : 'text-red-600'}`}>
@@ -183,37 +185,37 @@ export default function ProfileEditPage() {
       onChange={handleImageChange}
       className="hidden"
     />
-    <p className="text-sm text-gray-500 mt-2">Click image to upload</p>
+    <p className="text-sm  mt-2 text-[#ec4899]">Click image to upload</p>
   </label>
 </div>
 
         <div className="mb-3">
-          <label className="block font-semibold">Name</label>
-          <p className="p-2 bg-gray-100 rounded">{user?.name}</p>
+          <label className="block font-semibold text-[#007bff]">Name</label>
+          <p className="p-2 bg-[#e6f3ff] rounded border-1 border-[#ec4899] ">{user?.name}</p>
         </div>
 
         <div className="mb-3">
-          <label className="block font-semibold">Email</label>
-          <p className="p-2 bg-gray-100 rounded">{user?.email}</p>
+          <label className="block font-semibold text-[#007bff]">Email</label>
+          <p className="p-2  rounded bg-[#e6f3ff] border-1 border-[#ec4899]">{user?.email}</p>
         </div>
 
         <div className="mb-3">
-          <label className="block font-semibold">Role</label>
-          <p className="p-2 bg-gray-100 rounded capitalize">{user?.role}</p>
+          <label className="block font-semibold  text-[#007bff]">Role</label>
+          <p className="p-2  rounded capitalize bg-[#e6f3ff] border-1 border-[#ec4899]">{user?.role}</p>
         </div>
 
         <div className="mb-3">
-          <label className="block font-semibold">Bio</label>
+          <label className="block font-semibold  text-[#007bff]">Bio</label>
           <textarea
-            className="w-full border p-2 rounded"
+            className="w-full border p-2 rounded bg-[#e6f3ff] border-1 border-[#ec4899]"
             value={bio}
             onChange={(e) => setBio(e.target.value)}
           />
         </div>
 
         <div className="mb-3">
-          <label className="block font-semibold mb-1">Skills</label>
-          <Select
+          <label className="block font-semibold mb-1 text-[#007bff] ">Skills</label>
+          <Select className="border-1 border-[#ec4899] rounded" 
             isMulti
             options={skillOptions}
             value={skillOptions.filter(opt => skills.includes(opt.value))}
@@ -225,9 +227,9 @@ export default function ProfileEditPage() {
         </div>
 
         <div className="mb-3">
-          <label className="block font-semibold">Goals</label>
+          <label className="block font-semibold  text-[#007bff]">Goals</label>
           <input
-            className="w-full border p-2 rounded"
+            className="w-full border-1 border-[#ec4899] p-2 rounded bg-[#e6f3ff]"
             value={goals}
             onChange={(e) => setGoals(e.target.value)}
           />
@@ -235,7 +237,7 @@ export default function ProfileEditPage() {
 
         <button
           type="submit"
-          className="bg-blue-600 text-white px-4 py-2 w-full rounded mt-4"
+          className="bg-blue-600 text-white px-4 py-2 w-full rounded mt-4 "
         >
           Update Profile
         </button>
