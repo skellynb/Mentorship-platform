@@ -41,7 +41,8 @@ export const getCurrentUser = async (req: Request, res: Response): Promise<void>
 
 export const updateProfile = async (req: Request, res: Response): Promise<void> => {
   const userId = (req as any).user.userId;
-  const { bio, skills, goals } = req.body;
+  const { bio = '', skills = '[]', goals = '' } = req.body || {};
+
 
   const user = await UserModel.findById(userId);
   if (!user) {
@@ -49,11 +50,28 @@ export const updateProfile = async (req: Request, res: Response): Promise<void> 
     return;
   }
 
+    
+  // Handle profile picture upload (added)
+  if (req.file) {
+  const imageUrl = `${req.protocol}://${req.get('host')}/uploads/${req.file.filename}`;
+  user.profilePictureUrl = imageUrl;
+}
+
+
   // Only update if fields are provided
 
   user.bio = bio || user.bio;
-  user.skills = skills || user.skills;
+  
   user.goals = goals || user.goals;
+
+  try {
+    const parsedSkills = JSON.parse(skills);
+    if (Array.isArray(parsedSkills)) {
+      user.skills = parsedSkills;
+    }
+  } catch {
+    // If parsing fails, keep existing skills
+  }
 
   await user.save();
 

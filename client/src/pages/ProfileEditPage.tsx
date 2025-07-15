@@ -28,6 +28,7 @@ type UserType = {
   bio?: string;
   skills?: string[];
   goals?: string;
+  profilePictureUrl?: string;
 };
 
 export default function ProfileEditPage() {
@@ -37,7 +38,9 @@ export default function ProfileEditPage() {
   const [skills, setSkills] = useState<string[]>([]);
   const [goals, setGoals] = useState('');
   const [message, setMessage] = useState('');
+   const [previewImage, setPreviewImage] = useState<string | null>(null);
   const navigate = useNavigate();
+  const [imageFile, setImageFile] = useState<File | null>(null);
 
   const token = localStorage.getItem('token');
 
@@ -63,6 +66,7 @@ export default function ProfileEditPage() {
         setBio(data.bio || '');
         setSkills(data.skills || []);
         setGoals(data.goals || '');
+        setPreviewImage(data.profilePictureUrl || null);
         setLoading(false);
       } catch {
         navigate('/login');
@@ -77,6 +81,16 @@ export default function ProfileEditPage() {
     return bio.trim() !== '' && skills.length > 0 && goals.trim() !== '';
   };
 
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      setImageFile(file);
+      setPreviewImage(URL.createObjectURL(file));
+    }
+  };
+
+
+
   const handleUpdate = async (e: React.FormEvent) => {
     e.preventDefault();
     setMessage('');
@@ -86,23 +100,37 @@ export default function ProfileEditPage() {
       return; // do not navigate
     }
 
+    
+    const formData = new FormData();
+    formData.append('bio', bio);
+    formData.append('goals', goals);
+    formData.append('skills', JSON.stringify(skills));
+    if (imageFile) formData.append('profilePicture', imageFile);
+
+
     try {
       const res = await fetch(`${BASE_URL}/users/me/profile`, {
         method: 'PUT',
         headers: {
-          'Content-Type': 'application/json',
+          
           Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify({
-          bio,
-          skills,
-          goals,
-        }),
+        body:formData
       });
 
-      const data = await res.json();
+       const contentType = res.headers.get('content-type');
+  if (!res.ok) {
+    if (contentType && contentType.includes('application/json')) {
+      const errorData = await res.json();
+      throw new Error(errorData.message || 'Failed to update profile');
+    } else {
+      throw new Error(`Server error: ${res.status}`);
+    }
+  }
 
-      if (!res.ok) throw new Error(data.message);
+      const data = await res.json();
+      setUser(data.user); 
+
 
       setMessage('Profile updated successfully!');
       navigate('/dashboard'); // only navigate when profile is complete & successfully updated
@@ -128,6 +156,36 @@ export default function ProfileEditPage() {
             {message}
           </p>
         )}
+
+       <div className="mb-4 text-center">
+  <label htmlFor="profile-upload" className="cursor-pointer inline-block relative">
+    {previewImage ? (
+      <img
+        src={previewImage}
+        alt="Profile"
+        className="w-24 h-24 rounded-full object-cover border mx-auto"
+      />
+    ) : (
+      <div className="w-24 h-24 rounded-full bg-gray-100 mx-auto flex items-center justify-center">
+        <svg
+          className="w-12 h-12 text-gray-400"
+          fill="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path d="M12 12c2.7 0 5-2.3 5-5s-2.3-5-5-5-5 2.3-5 5 2.3 5 5 5zm0 2c-3.3 0-10 1.7-10 5v3h20v-3c0-3.3-6.7-5-10-5z" />
+        </svg>
+      </div>
+    )}
+    <input
+      id="profile-upload"
+      type="file"
+      accept="image/*"
+      onChange={handleImageChange}
+      className="hidden"
+    />
+    <p className="text-sm text-gray-500 mt-2">Click image to upload</p>
+  </label>
+</div>
 
         <div className="mb-3">
           <label className="block font-semibold">Name</label>

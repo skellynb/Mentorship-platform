@@ -15,6 +15,7 @@ export interface IUser extends Document {
   bio: string; //? means its optional
   skills: string[];
   goals: string;
+  profilePictureUrl?: string;
 }
 
 // Mongoose schema (this defines how it’s stored in MongoDB)
@@ -25,7 +26,8 @@ const userSchema = new mongoose.Schema<IUser>({
   role: { type: String, enum: ['admin', 'mentor', 'mentee'], required: true },
   bio: String,
   skills: [String],
-  goals: String
+  goals: String,
+  profilePictureUrl: { type: String, default: '' } 
 }, { timestamps: true });
 
 

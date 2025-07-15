@@ -1,6 +1,7 @@
 import express from 'express';
 import { protect, allowRoles } from '../middleware/authMiddleware';
 import { getCurrentUser, updateProfile, getAllMentors, getUserById } from '../controllers/userController';
+import { upload } from '../middleware/upload';
 
 
 
@@ -17,7 +18,7 @@ router.get('/admin-only', protect, allowRoles('admin'), (req, res) => {
 
 router.get('/me', protect,getCurrentUser);
 
-router.put('/me/profile', protect, updateProfile);
+router.put('/me/profile', protect, upload.single('profilePicture'), updateProfile);
 
 //valid jwt token and allows only mentees and admins access
 router.get('/mentors', protect, allowRoles('mentee', 'admin'), getAllMentors);
