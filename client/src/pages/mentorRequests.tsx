@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import BASE_URL from '../api';
+import { useNavigate } from 'react-router-dom';
 
 interface Request {
   _id: string;
@@ -15,6 +16,8 @@ interface Request {
 export default function MentorRequests() {
   const [requests, setRequests] = useState<Request[]>([]);
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
+
 
   const token = localStorage.getItem('token');
 
@@ -64,6 +67,16 @@ export default function MentorRequests() {
   if (loading) return <p>Loading requests...</p>;
 
   return (
+    <div
+      className="min-h-screen p-6"
+      style={{ backgroundImage: 'linear-gradient(to right, #dceeff, #ffe3e3)' }}
+    >
+      <button
+        onClick={() => navigate('/dashboard')}
+        className="mb-4 bg-[#1e3a8a] px-4 py-2 rounded hover:bg-gray-300"
+      >
+        ← Back to Dashboard
+      </button>
     <div className="p-6">
       <h1 className="text-2xl font-bold mb-4">Incoming Mentorship Requests</h1>
       {requests.length === 0 ? (
@@ -97,6 +110,7 @@ export default function MentorRequests() {
           </div>
         ))
       )}
+    </div>
     </div>
   );
 }
