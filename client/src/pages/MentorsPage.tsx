@@ -144,11 +144,11 @@ export default function MentorsPage() {
   if (loading) return <p className="p-4">Loading mentors...</p>;
 
   return (
-    <div className="p-6">
+    <div className="p-6 bg-red-50">
       {/*Back to dashboard */}
       <button
         onClick={() => navigate('/dashboard')}
-        className="mb-4 bg-gray-200 px-4 py-2 rounded hover:bg-gray-300"
+        className="mb-4 bg-[#1e3a8a] px-4 py-2 rounded hover:bg-gray-300"
       >
         ← Back to Dashboard
       </button>
@@ -180,11 +180,11 @@ export default function MentorsPage() {
             return (
               <div
                 key={mentor._id}
-                className="bg-white p-4 rounded shadow border border-gray-200"
+                className="bg-gray-300 p-4 rounded shadow border border-gray-200"
               >
                 <h2 className="text-lg font-semibold">{mentor.name}</h2>
-                <p className="text-gray-600">{mentor.bio || 'No bio provided.'}</p>
-                <p className="text-sm text-gray-500 mt-1">
+                <p className="">{mentor.bio || 'No bio provided.'}</p>
+                <p className="text-sm mt-1">
                   Skills: {mentor.skills?.join(', ') || 'N/A'}
                 </p>
 

@@ -61,6 +61,13 @@ export default function MainLayout({
       {/* Sidebar */}
       <aside className="w-64 bg-[#dceeff] text-black p-6 flex flex-col">
         <div className="flex flex-col items-center mb-8">
+
+           <img
+            src='/logo.svg'
+            alt="logo"
+            className="w-40 h-auto mb-6 "
+          />
+
           <img
             src={user.profilePictureUrl || '/default-avatar.png'}
             alt="Profile"
@@ -75,8 +82,8 @@ export default function MainLayout({
             <Link
               key={path}
               to={path}
-              className={`px-4 py-2 rounded hover:bg-blue-700 ${
-                activePath === path ? 'bg-blue-800 font-bold' : ''
+              className={`px-4 py-2 rounded hover:bg-[#1E3A8A] ${
+                activePath === path ? ' font-bold' : ''
               }`}
             >
               {label}
@@ -93,7 +100,7 @@ export default function MainLayout({
       </aside>
 
       {/* Main Content Area */}
-      <main className="flex-1 p-6 overflow-y-auto bg-gray-50">{children}</main>
+      <main className="flex-1 p-6 overflow-y-auto bg-red-50">{children}</main>
     </div>
   );
 }
