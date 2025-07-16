@@ -35,3 +35,19 @@ export const getAvailability = async (req: Request, res: Response) => {
     res.status(500).json({ error: 'Failed to fetch availability' });
   }
 };
+
+export const getOwnAvailability = async (req: Request, res: Response) :Promise<void> => {
+  try {
+    const mentorId = (req as any).user?.userId;
+    if (!mentorId)
+       res.status(401).json({ error: 'Unauthorized' });
+
+    const slots = await Availability.find({ mentorId });
+    res.json(slots);
+  } catch (error) {
+    console.error('Get own availability error:', error);
+    res.status(500).json({ error: 'Failed to fetch availability' });
+  }
+   return;
+};
+

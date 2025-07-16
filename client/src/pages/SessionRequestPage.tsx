@@ -140,7 +140,7 @@ export default function SessionRequestPage() {
   };
 
   return (
-    <div className="p-6">
+    <div className="p-6 bg-red-50">
       <h1 className="text-2xl font-bold mb-4">Your Mentorship Requests</h1>
       {requests.map((req) => {
         const isBooked = bookedMentors[req.to._id];
@@ -148,7 +148,7 @@ export default function SessionRequestPage() {
         console.log('isBooked:', isBooked, 'for mentor', req.to._id);
 
         return (
-          <div key={req._id} className="bg-white rounded shadow p-4 mb-4">
+          <div key={req._id} className="bg-red-50 rounded shadow p-4 mb-4">
             <h2 className="text-lg font-semibold">Mentor: {req.to.name}</h2>
             <p className="text-sm text-gray-700">Message: {req.message}</p>
             <p>

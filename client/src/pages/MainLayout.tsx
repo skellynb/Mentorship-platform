@@ -69,7 +69,7 @@ export default function MainLayout({
           />
 
           <img
-            src={user.profilePictureUrl || '/default-avatar.png'}
+            src={user.profilePictureUrl || '/avatar.svg'}
             alt="Profile"
             className="w-24 h-24 rounded-full border-4 border-white object-cover"
           />
