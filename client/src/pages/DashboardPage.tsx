@@ -11,13 +11,17 @@ interface User {
 interface Session {
   _id: string;
   date: string;
-  mentor?: { name: string };
-  mentee?: { name: string };
+  startTime: string;
+  endTime: string;
+  status: string;
+  mentorName: string;
+  menteeName: string;
 }
 
 export default function DashboardPage() {
   const [user, setUser] = useState<User | null>(null);
   const [sessions, setSessions] = useState<Session[]>([]);
+  
   const token = localStorage.getItem('token');
 
   // Fetch user
@@ -93,8 +97,8 @@ export default function DashboardPage() {
                   <h3 className="text-lg font-bold text-blue-700 mb-1">
                     📅 {user.role === 'mentee' ? 'Mentor' : 'Mentee'}:{' '}
                     {user.role === 'mentee'
-                      ? session.mentor?.name || 'Unknown'
-                      : session.mentee?.name || 'Unknown'}
+                      ? session.mentorName || 'Unknown'
+                      : session.menteeName }
                   </h3>
                   <p className="text-sm text-gray-600">
                     🗓️ Date: {new Date(session.date).toLocaleDateString()}
