@@ -27,7 +27,16 @@ export default function MySessionsPage() {
   }, [token]);
 
   return (
-    <div className="max-w-3xl mx-auto p-6">
+     <div
+      className="min-h-screen p-6"
+      style={{ backgroundImage: 'linear-gradient(to right, #dceeff, #ffe3e3)' }}
+    >
+      <button
+        onClick={() => navigate('/dashboard')}
+        className="mb-4 bg-[#1e3a8a] px-4 py-2 rounded hover:bg-gray-300"
+      >
+        ← Back to Dashboard
+      </button>
       <h1 className="text-2xl font-bold mb-4">My Sessions</h1>
       {sessions.length === 0 ? (
         <p>No sessions booked yet.</p>
